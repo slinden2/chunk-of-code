@@ -25,7 +25,7 @@ The .ico format is recommended, because one file can contain various dimensions 
 
 The favicon is referenced in the `index.html` file:
 
-```
+```html
 <link rel=shortcut icon href=%PUBLIC_URL%/favicon.ico />
 ```
 
@@ -33,19 +33,19 @@ The favicon is referenced in the `index.html` file:
 
 The `index.html` file in the Public folder is used as the template file of the app.
 
-```
-<html lang=en>
+```html
+<html lang="en">
   <head>
-    <meta charset=utf-8 />
-    <link rel=shortcut icon href=%PUBLIC_URL%/favicon.ico />
-    <meta name=viewport content=width=device-width, initial-scale=1 />
-    <meta name=theme-color content=#000000 />
+    <meta charset="utf-8" />
+    <link rel=shortcut icon href=%PUBLIC_URL%/favicon.ico /> <meta name=viewport
+    content=width=device-width, initial-scale=1 />
+    <meta name="theme-color" content="#000000" />
     <link rel=manifest href=%PUBLIC_URL%/manifest.json />
     <title>React App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id=root></div>
+    <div id="root"></div>
   </body>
 </html>
 ```
@@ -60,7 +60,7 @@ Note that all the dynamic content of the app will be injected in the root div:
 
 You may notice that the JavaScript files in the `src` folder seem to have no connection to this template file. The connection will be created by the build process and the script tags will appear when your run your app and inspect the page. This is what I find at the bottom of the body tag of my default `create-react-app` app.
 
-```
+```html
 <script src=/static/js/bundle.js></script>
 <script src=/static/js/0.chunk.js></script>
 <script src=/static/js/main.chunk.js></script>
@@ -70,7 +70,7 @@ You may notice that the JavaScript files in the `src` folder seem to have no con
 
 `manifest.json` is the file that _describes_ the app. The details in this file will be used in app-like conditions, like when you _install_ the react app on your desktop or smart phone.
 
-```
+```js
 {
   short_name: React App,
   name: Create React App Sample,

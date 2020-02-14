@@ -18,7 +18,7 @@ You can download the source file used as an example from [here](http://s000.tiny
 
 Let's start with the main program that runs when the module is called.
 
-```
+```py
 import csv
 import aiohttp
 import asyncio
@@ -42,7 +42,7 @@ After importing the necessary libraries, we initialize the constant that we used
 
 After receiving the list of companies, it is time to start using the `asyncio` library. First we create an event loop and start it in the main module. `data` will contain the list of results for further processing.
 
-```
+```py
 async def get_api_data(company_list):
     tasks = []
     connector = aiohttp.TCPConnector(limit=10)
@@ -72,7 +72,7 @@ The for loop is directly from the [synchronous version](/get-json-data-from-an-a
 
 Then we append the tasks to the task list. Take a look at the `fetch` function below. We pass the session, number, code and url as arguments into the function.
 
-```
+```py
 async def fetch(session, number, code, url):
     async with session.get(url) as response:
         return (number, code, await response.json())

@@ -7,27 +7,30 @@ tags: ["hooks", "react"]
 
 This week I am just going to share with you a nice and simple custom hook for controlling an input field in React. Let's start with the the code:
 
-```
-import { useState } from 'react'
+```jsx
+import { useState } from "react"
 
 export const useField = (type, name) => {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState("")
 
-  const onChange = (event) => {
+  const onChange = event => {
     setValue(event.target.value)
   }
 
   const reset = () => {
-    setValue('')
+    setValue("")
   }
 
-  return [{
-    type,
-    name,
-    value,
-    onChange,
-    'data-cy': name
-  }, reset]
+  return [
+    {
+      type,
+      name,
+      value,
+      onChange,
+      "data-cy": name,
+    },
+    reset,
+  ]
 }
 ```
 
@@ -37,9 +40,9 @@ The hook returns a list with two items in it. The first one is the object that c
 
 ## How to use the hook?
 
-```
+```jsx
 const App = () => {
-  const [username, resetUsername] = useField('text', 'username')
+  const [username, resetUsername] = useField("text", "username")
 
   return (
     <div>

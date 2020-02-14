@@ -41,7 +41,7 @@ npm install nodemon --save-dev
 
 Then create a new file `server.js` in the `backend` directory. Open the file in your text editor and paste in the following code:
 
-```javascript
+```js
 const express = require("express")
 const app = express()
 app.listen(3000, () => {

@@ -19,7 +19,7 @@ Unfortunately it currently doesn't support hooks and relies on render props.
 
 This example code is from the react-media docs:
 
-```javascript
+```jsx
 import React from "react"
 import Media from "react-media"
 
@@ -50,7 +50,7 @@ We import the Media component from `react-media` and use it in the `render` meth
 
 This is a trimmed example from the `react-responsive` documentation.
 
-```javascript
+```jsx
 import MediaQuery from 'react-responsive';
 
 const Example = () => (
@@ -69,7 +69,7 @@ We can see that the syntax is much cleaner that the render prop syntax of `react
 
 When they get it ready, the API will look close to something like this:
 
-```javascript
+```jsx
 import React from "react"
 import MediaQuery, { useMediaQuery } from "react-responsive"
 
@@ -89,5 +89,3 @@ With the hook support the syntax going get even more concise and easier to read.
 ## Conclusion
 
 Even if I love the more concise syntax of `react-responsive`, I would go with `react-media`. [This](https://github.com/ReactTraining/react-media/issues/70#issuecomment-347774260) comment explains the difference well between the two libraries. `react-media` is more efficient as it doesn't need to uselessly create components that are not used for in case of no match in the media query. Creating useless desktop components on a small low-end mobile device can really affect negatively on the performance of your site.
-
-Please let me know what you think in the comments below!

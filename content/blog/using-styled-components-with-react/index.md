@@ -11,7 +11,7 @@ Recently I have started learning how to use styled components CSS-in-JS library 
 
 Styled components are components that enhance regular React components with some CSS styling, as the name states. For example, a simple React components could be like this:
 
-```javascript
+```jsx
 import React from "react"
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
 
 If we wanted to modify the background color with styled components, we could do it like this:
 
-```javascript
+```jsx
 import React from "react"
 import styled from "styled-components"
 

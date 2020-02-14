@@ -21,4 +21,4 @@ There is also a series of side skills that one should master like package manage
 
 There is so much learn. That is what makes the IT industry so exiting. I love learning and being able to get noticeably better at what you do day-by-day really keeps the motivation up. As my goal is to find a job as a web developer, I will start writing more about the things I need to learn in order to achieve my goal. The next articles posted in this blog will be about related to web development. I will shift focus from Python onto JavaScript and I will delve in all the stuff related to this ecosystem.
 
-If you read this far, please leave a comment and give your thoughts about the subject.
+Thanks for reading.

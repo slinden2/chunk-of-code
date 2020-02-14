@@ -73,32 +73,32 @@ The open the _index.js_ in your text editor.
 
 The starting point is this:
 
-```
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+```jsx
+import React from "react"
+import ReactDOM from "react-dom"
+import "./index.css"
+import App from "./App"
+import * as serviceWorker from "./serviceWorker"
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.unregister()
 ```
 
 Also from this file, we can remove almost everything. Edit your file so that it results like here below:
 
-```
-import React from 'react';
-import ReactDOM from 'react-dom';
+```jsx
+import React from "react"
+import ReactDOM from "react-dom"
 
 const App = () => {
-    return <h1>Hello World!</h1>
+  return <h1>Hello World!</h1>
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"))
 ```
 
 Now, start the server again from the command prompt and the Hello World heading will be rendered on the page. The server is intelligent and allows for a fast development. For example, if you now change the _Hello World_ text to something else and save, you will notice that the server reloads the contents automatically. This way we can see the changes immediately.

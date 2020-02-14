@@ -26,18 +26,18 @@ npm install redux react-redux redux-thunk redux-devtools-extension --save
 
 _./src/index.js_
 
-```
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import App from './App'
-import store from './store'
+```jsx
+import React from "react"
+import ReactDOM from "react-dom"
+import { Provider } from "react-redux"
+import App from "./App"
+import store from "./store"
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 )
 ```
 
@@ -45,23 +45,19 @@ So here `<App />` is our main component that contains every other component you 
 
 _./src/store.js_
 
-```
-import { createStore, applyMiddleware, combineReducers } from 'redux'
-import thunk from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import reducer1 from './reducers/reducer1'
-import reducer2 from './reducers/reducer2'
-
+```jsx
+import { createStore, applyMiddleware, combineReducers } from "redux"
+import thunk from "redux-thunk"
+import { composeWithDevTools } from "redux-devtools-extension"
+import reducer1 from "./reducers/reducer1"
+import reducer2 from "./reducers/reducer2"
 
 const reducer = combineReducers({
   state1: reducer1,
   state2: reducer2,
 })
 
-const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(thunk))
-)
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 export default store
 ```
@@ -70,12 +66,12 @@ This is where we setup the state container of the application. I already use two
 
 _./src/App.js_
 
-```
-import React from 'react'
-import { connect } from 'react-redux'
-import Subcomponent from './components/Subcomponent'
-import { addThis } from './reducers/reducer1'
-import { addThat } from './reducers/reducer2'
+```jsx
+import React from "react"
+import { connect } from "react-redux"
+import Subcomponent from "./components/Subcomponent"
+import { addThis } from "./reducers/reducer1"
+import { addThat } from "./reducers/reducer2"
 
 const App = props => {
   return (
@@ -98,10 +94,7 @@ const mapDispatchToProps = {
   addThat,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
 ```
 
 Here we import the `connect()` function, which gives us access to the Redux store. We also import the `Subcomponent` and action creators from the reducer files.
@@ -114,11 +107,11 @@ Lastly, we connect our app the the Redux store by calling `connect(mapStateToPro
 
 _./src/components/Subcomponent.js_
 
-```
-import React from 'react'
-import { connect } from 'react-redux'
-import { addThis } from '../reducers/reducer1'
-import { addThat } from '../reducers/reducer2'
+```jsx
+import React from "react"
+import { connect } from "react-redux"
+import { addThis } from "../reducers/reducer1"
+import { addThat } from "../reducers/reducer2"
 
 const Subcomponent = props => {
   return <h2>Subcomponent</h2>
@@ -136,31 +129,28 @@ const mapDispatchToProps = {
   addThat,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Subcomponent)
+export default connect(mapStateToProps, mapDispatchToProps)(Subcomponent)
 ```
 
 Nothing special here. At this point the component is basically identical to the App component.
 
 _./src/reducers/reducer1.js_
 
-```
-const reducer = (state = '', action) => {
+```jsx
+const reducer = (state = "", action) => {
   switch (action.type) {
-  case 'DO_THIS':
-    return action.data
-  default:
-    return state
+    case "DO_THIS":
+      return action.data
+    default:
+      return state
   }
 }
 
 export const addThis = content => {
   return dispatch => {
     dispatch({
-      type: 'DO_THIS',
-      data: content
+      type: "DO_THIS",
+      data: content,
     })
   }
 }
@@ -170,22 +160,22 @@ export default reducer
 
 _./src/reducers/reducer2.js_
 
-```
-const reducer = (state = '', action) => {
+```jsx
+const reducer = (state = "", action) => {
   switch (action.type) {
-  case 'DO_THAT':
-    return action.data
-  default:
-    return state
+    case "DO_THAT":
+      return action.data
+    default:
+      return state
   }
 }
 
 export const addThat = content => {
   return dispatch => {
     dispatch({
-      type: 'DO_THAT',
-      data: content
-      })
+      type: "DO_THAT",
+      data: content,
+    })
   }
 }
 
@@ -196,14 +186,14 @@ The reducers are equal in this example. The action creator functions are to be c
 
 Because we used also the `redux-thunk` middleware, we could also you async function in the action creator function. We could for example, do something like this:
 
-```
+```jsx
 export const addThat = content => {
   return async dispatch => {
     const data = await axios.get(url)
     dispatch({
-      type: 'DO_THAT',
-      data
-      })
+      type: "DO_THAT",
+      data,
+    })
   }
 }
 ```

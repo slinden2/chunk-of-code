@@ -5,6 +5,9 @@ date: "20190504"
 tags: ["hooks", "react", "ref"]
 ---
 
+_Update on 14 Feb 2020_
+_I moved my block and the code highlighting and row numbering is not working 100% correctly. I am sorry for the inconvenience._
+
 This week I was doing some work with React components that involved hooks. I am going to show you an example of a sneaky bug that is not easy to avoid if you don't actively think about it. In this example I will just use some pseudocode to make an example, but the code won't run if you try to follow along by pasting the code in your text editor.
 
 The example code is from an application that allows the user to post blogs to a database. The problem that I had was related to a _ref_. A ref is a reference to a specific instance of a component. By default, React let's you to access only a component, but everything that is inside it, is hidden. Refs allow you to get access to functions or DOM nodes that are within a child component. It this case I needed to access a function within a child component to change its state from _open_ to _closed_.
@@ -15,14 +18,14 @@ In my program there were three components directly related to the bug: App.js, T
 
 ## App.js component
 
-```
-import React, { useState, useEffect } from 'react'
-import BlogForm from './components/BlogForm'
+```jsx
+import React, { useState, useEffect } from "react"
+import BlogForm from "./components/BlogForm"
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
   const [user, setUser] = useState(null)
   const [notification, setNotification] = useState({})
   const [timeoutId, setTimeoutId] = useState(0)
@@ -40,7 +43,7 @@ const App = () => {
   const blogFormRef = React.createRef()
 
   const blogForm = () => (
-    <Togglable buttonLabel='add blog' ref={blogFormRef}>
+    <Togglable buttonLabel="add blog" ref={blogFormRef}>
       <BlogForm
         blogs={blogs}
         setBlogs={setBlogs}
@@ -52,7 +55,7 @@ const App = () => {
 
   const blogRows = () => {
     const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes)
-    return sortedBlogs.map(blog =>
+    return sortedBlogs.map(blog => (
       <Blog
         key={blog.id}
         user={user}
@@ -60,36 +63,38 @@ const App = () => {
         blogs={blogs}
         notify={notify}
         setBlogs={setBlogs}
-      />)
+      />
+    ))
   }
 
-return (
-  <div>
-    <h2>Log in to application</h2>
-    <Notification notification={notification} />
-    <form onSubmit={handleLogin} className='loginform'>
-      <div>
-        username
-        <input
-          type=text
-          name=Username
-          value={username}
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </div>
-      <div>
-        password
-        <input
-          type=text
-          name=Password
-          value={password}
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type=submit>log in</button>
-    </form>
-  </div>
-)}
+  return (
+    <div>
+      <h2>Log in to application</h2>
+      <Notification notification={notification} />
+      <form onSubmit={handleLogin} className="loginform">
+        <div>
+          username
+          <input
+            type="text"
+            name="Username"
+            value={username}
+            onChange={({ target }) => setUsername(target.value)}
+          />
+        </div>
+        <div>
+          password
+          <input
+            type="text"
+            name="Password"
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </div>
+        <button type="submit">log in</button>
+      </form>
+    </div>
+  )
+}
 
 export default App
 ```
@@ -98,14 +103,14 @@ The `App` component is the heart of the application. It contains most of the sta
 
 ## Togglable.js component
 
-```
-import React, { useState, useImperativeHandle } from 'react'
+```jsx
+import React, { useState, useImperativeHandle } from "react"
 
 const Togglable = React.forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false)
 
-  const visibleWhenHidden = { display: visible ? 'none' : '' }
-  const visibleWhenShown = { display: visible ? '' : 'none' }
+  const visibleWhenHidden = { display: visible ? "none" : "" }
+  const visibleWhenShown = { display: visible ? "" : "none" }
 
   const toggleVisibility = () => {
     setVisible(!visible)
@@ -113,7 +118,7 @@ const Togglable = React.forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => {
     return {
-      toggleVisibility
+      toggleVisibility,
     }
   })
 
@@ -139,29 +144,29 @@ The thing that I need to access from the `BlogForm` component is the `toggleVisi
 
 ## BlogForm.js component
 
-```
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import blogService from '../services/blogs'
+```jsx
+import React, { useState } from "react"
+import PropTypes from "prop-types"
+import blogService from "../services/blogs"
 
 const BlogForm = ({ blogs, setBlogs, notify, blogFormRef }) => {
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  const [title, setTitle] = useState("")
+  const [author, setAuthor] = useState("")
+  const [url, setUrl] = useState("")
 
   const handleBlogCreation = async event => {
     event.preventDefault()
 
     let blogObject = {}
-    for (const input of event.target.querySelectorAll('input')) {
+    for (const input of event.target.querySelectorAll("input")) {
       blogObject[input.name] = input.value
     }
 
     try {
       const blog = await blogService.create(blogObject)
-      setTitle('')
-      setAuthor('')
-      setUrl('')
+      setTitle("")
+      setAuthor("")
+      setUrl("")
       setBlogs(blogs.concat(newBlog))
       notify(`a new blog ${newBlog.title} successfully added`)
       blogFormRef.current.toggleVisibility()
@@ -177,8 +182,8 @@ const BlogForm = ({ blogs, setBlogs, notify, blogFormRef }) => {
         <div>
           title:
           <input
-            type=text
-            name=title
+            type="text"
+            name="title"
             value={title}
             onChange={({ target }) => setTitle(target.value)}
           />
@@ -186,8 +191,8 @@ const BlogForm = ({ blogs, setBlogs, notify, blogFormRef }) => {
         <div>
           author:
           <input
-            type=text
-            name=author
+            type="text"
+            name="author"
             value={author}
             onChange={({ target }) => setAuthor(target.value)}
           />
@@ -195,13 +200,13 @@ const BlogForm = ({ blogs, setBlogs, notify, blogFormRef }) => {
         <div>
           url:
           <input
-            type=text
-            name=url
+            type="text"
+            name="url"
             value={url}
             onChange={({ target }) => setUrl(target.value)}
           />
         </div>
-        <button type=submit>create</button>
+        <button type="submit">create</button>
       </form>
     </div>
   )

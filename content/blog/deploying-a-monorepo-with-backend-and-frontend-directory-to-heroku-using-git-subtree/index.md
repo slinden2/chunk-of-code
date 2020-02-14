@@ -117,7 +117,7 @@ Let's create a file called `heroku-deploy.py` in the project root folder.
 
 The file will be like this:
 
-```Python
+```py
 import os
 import shutil
 import sys

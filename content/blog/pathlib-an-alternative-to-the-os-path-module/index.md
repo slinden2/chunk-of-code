@@ -21,7 +21,7 @@ Instantiating `pathlib.PurePath` returns `PurePosixPath` or `PureWindowsPath` de
 
 Pure paths may be useful also if you need to manipulate Unix paths on a Windows system and vice versa. A path can be created from segments of strings or `os.PathLike` objects. Let's take a look at the example below.
 
-```
+```py
 from pathlib import PurePath
 
 path = PurePath(first, second, third)
@@ -32,7 +32,7 @@ The code prints out `PureWindowsPath('first/second/third')`. If you run the code
 
 The syntax for extending an existing path is not obvious, but once you get used to it, it will prove itself very readable. The division operator `/` is used for the extension.
 
-```
+```py
 from pathlib import PurePath
 
 path = PurePath(first, second, third)
@@ -46,7 +46,7 @@ The code above prints out `PureWindowsPath('first/second/third/fourth')`.
 
 You can also use the double-dot operator (ie. refer to parent folder) with it. The single-dot operator, which refers to the current folder, will get automatically trimmed.
 
-```
+```py
 from pathlib import PurePath
 
 path = PurePath(first, second, third)
@@ -70,7 +70,7 @@ The concrete paths just like the pure paths are cross-platform compatible as the
 
 The usage of the Path class is pretty straight-forward. Let's delve into an example right away to make the concept of `Path` brighter.
 
-```
+```py
 from pathlib import Path
 
 # Current folder
@@ -120,7 +120,7 @@ Some more interesting methods are `Path.iterdir()` and `Path.glob()`.
 
 Also `Path.glob()` create a generator that yield all files that match to your search term. You could use it to find all python files in a path like this:
 
-```
+```py
 current_path = Path.cwd()
 for py_file in current_path.glob(*.py):
     print(py_file)

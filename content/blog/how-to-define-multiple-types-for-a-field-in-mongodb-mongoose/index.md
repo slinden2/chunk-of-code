@@ -35,9 +35,9 @@ If subdocument is of a different type, how can we populate it when needed? The a
 
 First, let's get our example schemas ready. We need 3 schemas in total: _person_, _dwarf-ability_, _elf-ability_.
 
-person.js
+_person.js_
 
-```javascript
+```js
 const mongoose = require('mongoose')
 
 const personSchema = mongoose.Schema({
@@ -66,9 +66,9 @@ const personSchema = mongoose.Schema({
 module.exports = mongoose.model('Person', personSchema)
 ```
 
-elf-ability.js
+_elf-ability.js_
 
-```javascript
+```js
 const mongoose = require('mongoose')
 
 const elfAbilitySchema = mongoose.Schema({
@@ -84,9 +84,9 @@ const elfAbilitySchema = mongoose.Schema({
 module.exports = mongoose.model('ElfAbility', elfAbilitySchema)
 ```
 
-dwarf-ability.js
+_dwarf-ability.js_
 
-```javascript
+```js
 const mongoose = require('mongoose')
 
 const dwarfAbilitySchema = mongoose.Schema({

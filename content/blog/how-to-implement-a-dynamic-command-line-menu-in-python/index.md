@@ -13,7 +13,7 @@ First I will show you the usual implementation so that the advantages of a dynam
 
 The first thing we need is a function that prints out the menu, so that the user knows which commands are available.
 
-```
+```py
 def print_menu():
 
     print((================================\n
@@ -30,7 +30,7 @@ def print_menu():
 
 I prefer this kind of multiline syntax, because it enables you to write clean and aligned rows and it is surely more beautiful than the following version:
 
-```
+```py
 def print_menu():
 
     print(================================
@@ -47,7 +47,7 @@ Enter a choice and press enter:)
 
 My preferred version needs more typing, but at least that way you don't have some strange unaligned string rows on the left. Then we create the actual menu functionality.
 
-```
+```py
 def menu():
 
     print_menu()
@@ -80,7 +80,7 @@ First we call the previously created `print_menu()` function and create a `user_
 
 Now we have our `print_menu()` function and the basic functionality in place. The next step is to run the program.
 
-```
+```py
 if __name__ == __main__:
     menu()
 ```
@@ -91,7 +91,7 @@ We could start developing the progam further by elaborating the `if` statements.
 
 We start by creating a new `class` for the controller with some methods in it. Let's call the class `Controller` and the methods `do_X`.
 
-```
+```py
 class Controller:
 
     @staticmethod
@@ -125,7 +125,7 @@ But how can we run all these methods? How do we bind the user input to a specifi
 
 The answer is rather simple once you've learned it once. We will need a separate helper method that takes the user input as an argument.
 
-```
+```py
     @staticmethod
     def execute(user_input):
         controller_name = fdo_{user_input}
@@ -145,7 +145,7 @@ Then we create a new variable, `controller`. We use the `getattr()` function to 
 
 If no error is raised, we run the `controller` method created by the `getattr()` function. Now we need something to tie all this together. In the `if/elif` example we used a `while` loop, and so we do also in this one. Let's create the `run()` method.
 
-```
+```py
     @staticmethod
     def run():
         user_input = 0
@@ -163,7 +163,7 @@ But there is no menu. We will need a `generate_menu()` method. But before writin
 
 Modify your do-methods as you please. I leave a one-method example here just for clarification.
 
-```
+```py
     @staticmethod
     def do_1():
         First menu item
@@ -172,12 +172,12 @@ Modify your do-methods as you please. I leave a one-method example here just for
 
 Then create the `generate_menu()` method.
 
-```
+```py
     @staticmethod
     def generate_menu():
         print(================================)
         do_methods = [m for m in dir(Controller) if m.startswith('do_')]
-        menu_string = \n.join(
+        menu_string = "\n".join(
             [f{method[-1]}.  {getattr(Controller, method).__doc__}
              for method in do_methods])
         print(menu_string)
@@ -196,7 +196,7 @@ These steps are repeated for all the methods in the `do_methods` list. As a resu
 
 Come to this point, we are ready to run our working controller.
 
-```
+```py
 def main():
     Controller.run()
 
@@ -215,4 +215,4 @@ The second way was a dynamic controller. This is the way that I recommend for la
 
 With the dynamic menu you can easily use other method ID's than numbers. Nothing prevents you from using something like _do_jump_ or _do_shoot_ as your method name. You just need to adapt the `generate_menu()` to your method names.
 
-That's all for now. Please leave a comment below. :)
+That's all for now. :)

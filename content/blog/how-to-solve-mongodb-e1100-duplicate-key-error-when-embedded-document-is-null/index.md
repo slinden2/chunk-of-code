@@ -17,7 +17,7 @@ E11000 duplicate key error collection: db_name.collection index: field_name.embe
 
 My schema is built more less like this:
 
-```javascript
+```js
 **GAME SCHEMA**
 const gameSchema = mongoose.Schema({
   gameId: {
@@ -55,7 +55,7 @@ This is not the case. I had already one game document in the DB without `video` 
 
 I needed a way to still mark the `videoId` field as unique, but I needed a way to allow multiple `null` values as well. The solution to this is `sparse` property.
 
-```javascript
+```js
 **VIDEO SCHEMA**
 const videoSchema = mongoose.Schema({
   videoId: {

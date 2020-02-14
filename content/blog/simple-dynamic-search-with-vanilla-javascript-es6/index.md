@@ -15,7 +15,7 @@ I, being passionate about programming and Javascript, decided to provide them th
 
 Firstly, I exported the part numbers from the ERP. You can download the fake file [here](./partnumbers.csv) if you wish to follow along. This is the html markup needed for the tool:
 
-```
+```html
 <html lang=en>
 
 <head>
@@ -45,7 +45,7 @@ This file is basically the same that our technicians are going to use. The only 
 
 Here is the `.css` file:
 
-```
+```css
 #root {
   margin: auto;
   width: 90%;
@@ -85,38 +85,37 @@ The CSS just give the basic styling for the page so that it is usable.
 
 Then the Javascript file. Note that it has to be in a sub-folder called _js_:
 
-```
-const container = document.querySelector('.container')
-const searchField = document.querySelector('.search-field')
+```js
+const container = document.querySelector(".container")
+const searchField = document.querySelector(".search-field")
 
-const path = 'excel_tmp.csv'
+const path = "excel_tmp.csv"
 let codes = []
 
 const fetchData = async path => {
-  return await d3.dsv(';', path)
+  return await d3.dsv(";", path)
 }
 
 fetchData(path)
-  .then(data => codes = codes.concat(data))
+  .then(data => (codes = codes.concat(data)))
   .then(createTable)
 
 function createTable(codes = codes) {
-  const table = document.createElement('table')
-  table.className = 'table'
+  const table = document.createElement("table")
+  table.className = "table"
   container.appendChild(table)
 
-  const tbody = document.createElement('tbody')
+  const tbody = document.createElement("tbody")
   table.appendChild(tbody)
   for (const row of codes) {
-    const tr = document.createElement('tr')
+    const tr = document.createElement("tr")
     for (const key in row) {
-      const td = document.createElement('td')
+      const td = document.createElement("td")
       td.textContent = row[key].slice(0, 80)
       tr.appendChild(td)
     }
     tbody.appendChild(tr)
   }
-
 }
 
 const filterCallback = (code, value) => {
@@ -132,18 +131,18 @@ const setFilter = ({ target: { value } }) => {
   createTable(codesToShow)
 }
 
-searchField.addEventListener('keyup', setFilter)
+searchField.addEventListener("keyup", setFilter)
 ```
 
 That is all there is. That is what is needed to load the `.csv` file and dynamically rerender the result table based off of the filter.
 
 Let's split it up so that I can explain what is going on.
 
-```
-const container = document.querySelector('.container')
-const searchField = document.querySelector('.search-field')
+```js
+const container = document.querySelector(".container")
+const searchField = document.querySelector(".search-field")
 
-const path = 'excel_tmp.csv'
+const path = "excel_tmp.csv"
 let codes = []
 ```
 
@@ -151,15 +150,15 @@ Here we get the DOM elements that we need for the application. `container` is th
 
 `searchField` is pretty self-explanatory and `codes` is the variable that holds the array of art numbers retrieved from the `.csv` file.
 
-```
-const path  = 'partnumbers.csv'
+```js
+const path = "partnumbers.csv"
 
 const fetchData = async path => {
-  return await d3.dsv(';', path)
+  return await d3.dsv(";", path)
 }
 
 fetchData(path)
-  .then(data => codes = codes.concat(data))
+  .then(data => (codes = codes.concat(data)))
   .then(createTable)
 ```
 
@@ -169,18 +168,18 @@ At this point the `codes` variable contains an array of objects. Every object ha
 
 Then we pass the date into `codes` and then we call `createTable`. `codes` is passed to the function automatically as an argument.
 
-```
+```js
 function createTable(codes = codes) {
-  const table = document.createElement('table')
-  table.className = 'table'
+  const table = document.createElement("table")
+  table.className = "table"
   container.appendChild(table)
 
-  const tbody = document.createElement('tbody')
+  const tbody = document.createElement("tbody")
   table.appendChild(tbody)
   for (const row of codes) {
-    const tr = document.createElement('tr')
+    const tr = document.createElement("tr")
     for (const key in row) {
-      const td = document.createElement('td')
+      const td = document.createElement("td")
       td.textContent = row[key].slice(0, 80)
       tr.appendChild(td)
     }
@@ -195,9 +194,9 @@ First we create the table element and add the class `table` to it. Then we appen
 
 After that we create the `tbody` element and attach that to the table element. Then we iterate over the `codes` array and create a `tr` element for every row.
 
-```
+```js
 for (const key in row) {
-  const td = document.createElement('td')
+  const td = document.createElement("td")
   td.textContent = row[key].slice(0, 80)
   tr.appendChild(td)
 }
@@ -208,7 +207,7 @@ Here we iterate over all the rows and create the `td` elements. Then we add the 
 
 We've reached the last part of the code:
 
-```
+```js
 const filterCallback = (code, value) => {
   return (
     code.Code.toLowerCase().includes(value.toLowerCase()) ||
@@ -222,7 +221,7 @@ const setFilter = ({ target: { value } }) => {
   createTable(codesToShow)
 }
 
-searchField.addEventListener('keyup', setFilter)
+searchField.addEventListener("keyup", setFilter)
 ```
 
 Check the last row first. We define the `searchField` elements to listen to `keyup` events and use `setFilter` as its callback function. Once again, the event will be passed to the call back automatically, so we will be able to access the value of the field after every key press.

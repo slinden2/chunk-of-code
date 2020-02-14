@@ -36,7 +36,7 @@ I suggest you to create a virtual environment for the purpose of this excercise.
 
 Go to your project folder and create a file called `helloworldmodule.c` and the let's get started.
 
-```
+```c
 #include <Python.h>
 ```
 
@@ -44,7 +44,7 @@ This line imports the Python header file and make the [Python C API](https://doc
 
 Let's create our first C function.
 
-```
+```c
 static PyObject *
 helloworld_say_hello(PyObject *self, PyObject *args)
 {
@@ -60,7 +60,7 @@ As you can see, the first function we are going to be doing is a simple _Hello W
 
 Next we are going to create a _method table_.
 
-```
+```c
 static PyMethodDef HelloWorldMethods[] = {
     {say_hello, helloworld_say_hello, METH_NOARGS, Say Hello World},
     {NULL, NULL, 0, NULL}};
@@ -76,7 +76,7 @@ The method struct must always end with `{NULL, NULL, 0, NULL}`. It tells the com
 
 The next step is to create the module object definition. It holds all the information needed to create a module object.
 
-```
+```c
 static struct PyModuleDef helloworld =
     {
         PyModuleDef_HEAD_INIT,
@@ -94,7 +94,7 @@ The last entry is a pointer to the method table that we defined before.
 
 The last step of the C code is to actually create the module.
 
-```
+```c
 PyMODINIT_FUNC PyInit_helloworld(void)
 {
     PyObject *module;
@@ -115,7 +115,7 @@ We are now done with the C part of the program. Let's take a look at the `setup.
 
 `setup.py` is the file that is used for compiling the C extension. We are using `setuptools` for creating the extension. `setuptools` is a library used for creating all kinds of python packages, not necessarily only C extensions. Create a new file called `setup.py` in your project folder where you should already have also the `helloworldmodule.c` file.
 
-```
+```py
 from setuptools import setup, Extension
 
 setup(
@@ -152,7 +152,7 @@ You should now have the package installed in your virtual environment. The next 
 
 Create a new file called `main.py` in your project folder.
 
-```
+```py
 import helloworld
 
 
@@ -173,5 +173,3 @@ If your code doesn't work, check that you don't get any errors when running `pyt
 Creating a C extension from scratch sure can be quite an intimidating and confusing task, if you don't have any previous experience from writing/reading C code. The [C API documentation](https://docs.python.org/3.7/c-api/) is a good place to start gathering more information if you are interested in creating something more useful or if you just want to learn some more.
 
 Learning this stuff isn't surely waste of time, because it can help you understand a lot better how Python works under the hood.
-
-If you come up with some cool extension, please share them in the comments below!

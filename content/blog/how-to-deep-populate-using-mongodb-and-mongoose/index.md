@@ -13,7 +13,7 @@ In any case, here is a small example of regular population:
 
 _person.js - schema for persons_
 
-```javascript
+```js
 const mongoose = require('mongoose')
 
 const personSchema = mongoose.Schema({
@@ -31,7 +31,7 @@ module.exports = mongoose.model('Person', personSchema)
 
 _address.js - schema for addresses_
 
-```javascript
+```js
 const mongoose = require('mongoose')
 
 const addressSchema = mongoose.Schema({
@@ -59,7 +59,7 @@ So we have two schemas, one for person and one for address. The person schema re
 
 This is how it is done:
 
-```javascript
+```js
 const person = await Person.findOne({
   name: "John",
 }).populate("address")
@@ -69,7 +69,7 @@ We don't have to populate all of the fields of an address document. We can selec
 
 This is how it is done:
 
-```javascript
+```js
 const person = await Person.findOne({
   name: "John",
 }).populate("address", { street: 1, zipCode: 1 })
@@ -81,7 +81,7 @@ That would return a `person` document with only `street` and `zipCode` in the ad
 
 What if you needed to populate a field that is in a document that you need to populate? I know, that phrase is a bit hard to grasp. I try again. Take a look at the `address` schema. What if `country` field was a reference to a `country` document:
 
-```javascript
+```js
 const addressSchema = mongoose.Schema({
   street: {
     type: String,
@@ -105,7 +105,7 @@ module.exports = mongoose.model('Address', addressSchema)
 
 Let's create a schema for the country as well:
 
-```javascript
+```js
 const mongoose = require('mongoose')
 
 const countrySchema = mongoose.Schema({
@@ -125,7 +125,7 @@ In the first example we had to populate `address` field with an `address` docume
 
 If you have encountered this problem, the first thing you try is probably chaining two `populate` methods like this:
 
-```javascript
+```js
 const person = await Person.findOne({
   name: "John",
 })
@@ -137,7 +137,7 @@ This doesn't work and once you think about it you notice that it shouldn't work 
 
 In order to populate the second layer, the syntax changes. First let's take a look at an example for one-layer population with the other syntax:
 
-```javascript
+```js
 const person = await Person.findOne({ name: "John" }).populate([
   {
     path: "address",
@@ -153,7 +153,7 @@ const person = await Person.findOne({ name: "John" }).populate([
 
 That is the equivalent of:
 
-```javascript
+```js
 const person = await Person.findOne({
   name: "John",
 }).populate("address", { street: 1, zipCode: 1 })
@@ -161,7 +161,7 @@ const person = await Person.findOne({
 
 Now, let's populate also the `country` field:
 
-```javascript
+```js
 const person = await Person.findOne({ name: "John" }).populate([
         {
           path: 'address',

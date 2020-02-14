@@ -18,7 +18,7 @@ He sent me the file and I started coding a program that could help him with his 
 
 The modules needed for the syncronous version are requests and csv. Let's import them first and initialize some constant variables:
 
-```
+```py
 import requests
 import csv
 
@@ -29,7 +29,7 @@ URL = http://avoindata.prh.fi/tr/v1/
 
 In this case the data comes from a Finnish website so don't worry about the puzzling URL. The data itself will be in English, so anyone will be able to follow along. The URL results in a bad request. It is just a base URL. In order to get some data, we need to attach a business ID at the end of it. We'll do it later.
 
-```
+```py
 result_list = []
 company_list = []
 
@@ -45,7 +45,7 @@ Here we initialize two lists: One for results and one for company data. Then we 
 
 After that we just iterate over the _reader_ variable and append every dictionary to the _company_list._
 
-```
+```py
 # open the output file
 with open(OUTPUT_FILE, 'a') as out_file:
 
@@ -75,7 +75,7 @@ You can check the result file [here](http://s000.tinyupload.com/index.php?file_i
 
 I also paste the complete code here below so you can just paste it to your editor for closer inspection.
 
-```
+```py
 import requests
 import csv
 
