@@ -1,7 +1,7 @@
 ---
 title: "Migrate from MongoDB Atlas to a local MongoDB database"
 published: true
-date: "2020707"
+date: "20200707"
 tags: ["mongodb", "dokku", "mongodump"]
 ---
 
