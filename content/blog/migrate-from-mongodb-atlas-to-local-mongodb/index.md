@@ -9,8 +9,6 @@ tags: ["mongodb", "dokku", "mongodump"]
 
 I have been using MongoDB Atlas for my hobby projects for over a year now. Usually I deploy all my hobby projects to my VPS where I run `dokku`. I wanted to try to migrate one of my databases to `dokku` to be run on the server where my application resides. I wanted to do this mainly because that way I could have all the app data centralized. For a hobby project this is not an issue but an advantage, as you don't have to log in to different systems to check stuff up.
 
-mongodump and mongorestore cannot be part of a backup strategy for 4.2+ sharded clusters that have sharded transactions in progress, as backups created with mongodump do not maintain the atomicity guarantees of transactions across shards.
-
 ## Hands-on
 
 ### Backing up existing Atlas database
@@ -31,7 +29,7 @@ mongodump --host <CLUSTERNAME>-shard-0/<CLUSTERNAME>-shard-00-00-jomgh.mongodb.n
 
 I have added `--archive` and `--gzip` commands there myself as they are not the by default. `--archive` makes the output to be a single file instead of a bunch of `.bson` files and `--gzip` compresses the file.
 
-Now you should have a file called `db.dump` in the directory where you ran the command (for example, ~/db.dump).
+Now you should have a file called `db.dump` in the directory where you ran the command (for example, `~/db.dump`).
 
 ### Creating MongoDB service for dokku
 
